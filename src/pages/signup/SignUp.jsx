@@ -16,7 +16,7 @@ function SignUp() {
   return (
     <>
       <div className="container">
-        <div className="row">
+        <div className="row pt-24">
           <div className="col-lg-10 col-xl-9 mx-auto h-100">
             <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
               <div className="card-img-left gradient__bg  d-flex  ">
@@ -92,7 +92,7 @@ function SignUp() {
         />
         <label htmlFor="floatingConfirmPassword">Confirm Password</label>
       </div>
-      {errors.confirmPassword?.type === "required" && <p className="text-danger">This field is required</p>}
+      {errors.confirmPassword?.type === "required" && <p className="text-danger mb-3">This field is required</p>}
       {errors.confirmPassword && <p className="text-danger mb-3">{errors.confirmPassword.message}</p>}
 
                  
