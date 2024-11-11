@@ -14,8 +14,8 @@ function Login() {
 
   return (
     <>
-      <div className="container">
-        <div className="row">
+      <div className="container ">
+        <div className="row pt-24">
           <div className="col-lg-10 col-xl-9 mx-auto h-100">
             <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
               <div className="card-img-left gradient__bg  d-flex  ">
@@ -57,8 +57,8 @@ function Login() {
                     />
                     <label>Password</label>
                   </div>
-                  {errors.password?.type=="required" && <p className=" text-danger">This field is required</p>}
-                  {errors.password?.type=="minLength" && <p className=" text-danger">8 characters minimum</p>}
+                  {errors.password?.type=="required" && <p className=" text-danger mb-3">This field is required</p>}
+                  {errors.password?.type=="minLength" && <p className=" text-danger mb-3">8 characters minimum</p>}
 
                   
                     <div className="d-grid mb-2">
