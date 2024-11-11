@@ -1,0 +1,16 @@
+:root {
+    --swiper-theme-color: #ff0f0f66;
+}
+.swiper-button-prev, .swiper-button-next{
+    color:rgba(255, 0, 0, 0.479) !important;
+}
+
+.selfTrain_section .cards-container img{
+    width: 160px !important;
+}
+ 
+
+.selfTrain_section h5{
+    font-size: 1.8em;
+}
+

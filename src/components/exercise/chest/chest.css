@@ -1,0 +1,67 @@
+
+  .home {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+      url(../imgs/ambitious-studio-rick-barrett-w7jYaN7GqyA-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  .exercise {
+    margin-block: 100px;
+  }
+  .exercise .image::before {
+    content: "";
+    left: -13.75rem;
+    top: 0;
+    background: #330808;
+    position: absolute;
+    width: 25rem;
+    height: 102%;
+    transform: skew(-30deg);
+  }
+  
+  .exercise .reverse::before {
+    content: "";
+    right: -13.75rem;
+    top: 0;
+    background: #330808;
+    position: absolute;
+    width: 25rem;
+    height: 102%;
+    transform: skew(30deg);
+  }
+  @media screen and (max-width: 991px) {
+    .exercise .image::before,
+    .exercise .reverse::before {
+      display: none;
+    }
+    .exercise:not(:last-child) {
+      padding-bottom: 20px;
+      border-bottom: 2px solid;
+    }
+    .caption {
+      order: -1;
+    }
+  }
+  .breadcrumb th,
+  .breadcrumb td {
+    background: #171717 !important;
+    color: white !important;
+  }
+  .breadcrumb li.breadcrumb-item.active,
+  li.breadcrumb-item a {
+    color: white;
+    font-weight: 200;
+  }
+  li.breadcrumb-item.active {
+    font-weight: 500 !important;
+    color: rgb(220, 53, 69) !important;
+  }
+  li.breadcrumb-item.active::before {
+    color: inherit;
+    font-weight: normal;
+  }
+  .btn {
+    transition: 0.3s !important  ;
+  }
+  

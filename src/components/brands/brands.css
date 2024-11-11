@@ -1,0 +1,15 @@
+.brands_container{
+    background-color: #a30d0a;
+}
+
+.brands_container img{
+    width: 120px  !important;
+    padding: 10px;
+}  
+
+@media screen and (max-width: 550px) {
+    .brands_container img{
+        width: 65px  !important;
+        padding: 10px;
+    }  
+}
