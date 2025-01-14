@@ -1,11 +1,5 @@
 
-  .home {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-      url(../imgs/ambitious-studio-rick-barrett-w7jYaN7GqyA-unsplash.jpg);
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-  }
+ 
   .exercise {
     margin-block: 100px;
   }

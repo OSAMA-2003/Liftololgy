@@ -19,7 +19,7 @@
 :root {
   --font-family: 'Manrope', sans-serif;
 
-  --gradient-text: linear-gradient(89.97deg, #b90d0d 1.84% ,  #837171  102.67% );
+  --gradient-text: linear-gradient(89.97deg, #ff0000 1.84% ,  #bfb4b4  102.67% );
 
   
   
@@ -29,6 +29,7 @@
 body{
   /* background-color: #171f2f ; */
   --font-family: 'Manrope', sans-serif;
+
   
 }
 
@@ -185,10 +186,11 @@ h1{
       calc(100% - var(--border-width))
   );
   transition: 200ms;
+
 }
 
 .btn:where(:hover, :focus) {
-  color: #fff;
+  color: #ff0000 !important;
 }
 
 

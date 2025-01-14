@@ -15,7 +15,7 @@ function SignUp() {
     const onSubmit = data => console.log(data)
   return (
     <>
-      <div className="container">
+      <div className="container min-h-screen">
         <div className="row pt-24">
           <div className="col-lg-10 col-xl-9 mx-auto h-100">
             <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
@@ -106,7 +106,7 @@ function SignUp() {
                     </div>
                   
 
-                  <Link to="/login" class="d-block text-black text-center mt-2 small">
+                  <Link to="/login" class="d-block text-black text-center my-2 mt-2 ">
                     Have an account? Login
                   </Link>
 

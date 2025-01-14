@@ -1,343 +1,153 @@
 /** @format */
 
-import "./chest.css";
-
-import dumBell from '../../../assets/dumbell-pench.mp4'
-
-import penchBar from '../../../assets/pench-bar.mp4'
-
-import dumbellFly from '../../../assets/dumbell-fly.mp4'
-
-import dip from '../../../assets/dip.mp4'
-
+import dumBell from "../../../assets/dumbell-pench.mp4";
+import penchBar from "../../../assets/pench-bar.mp4";
+import { useEffect } from "react";
 
 function Chest() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
+  
+
   return (
     <>
-      
-      <h1 className="mt-10 mb-32 text-white text-center pt-32">CHEST</h1>
+      <h1 className="mt-10 mb-32 text-white text-center pt-32 text-4xl font-bold uppercase">
+        Chest
+      </h1>
 
-      <div className="exercises">
-     
-      <div className="container">
-       
-        <div className="exercise row overflow-hidden">
-          <div className="col-12 col-lg-5 text-white caption">
-            <h2 className="fs-3 fw-bolder">
-              <i className="fa-thin fa-chevron-right me-1 text-danger"></i> Incline
-              Dumbbell Bench Press
+      <div className="space-y-24">
+        {/* Exercise 1 */}
+        <div className="flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 overflow-hidden">
+          {/* Text Section */}
+          <div className="lg:w-1/2 text-white space-y-5">
+            <h2 className="text-2xl font-bold">
+              <i className="fa-thin fa-chevron-right mr-2 text-red-500"></i>
+              Incline Dumbbell Bench Press
             </h2>
-            <div className="overview p-3 mt-5">
-              <h3 className="fw-light">Exercise Profile</h3>
-              <div className="profile p-5">
-                <div className="row row-cols-2">
-                  <div className="col fw-bold">Target Muscle Group</div>
-                  <div className="col fw-light">Chest</div>
+            <div className=" p-6 rounded-lg shadow-lg space-y-5">
+              <h3 className="font-light text-lg">Exercise Profile</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="font-bold">Target Muscle Group</span>
+                  <span>Chest</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Exercise Type</div>
-                  <div className="col fw-light">Strength</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Exercise Type</span>
+                  <span>Strength</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Equipment Required</div>
-                  <div className="col fw-light">Dumbbell</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Equipment Required</span>
+                  <span>Dumbbell</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Mechanics</div>
-                  <div className="col fw-light">Isolation</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Mechanics</span>
+                  <span>Isolation</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Force Type</div>
-                  <div className="col fw-light">Push (Bilateral)</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Force Type</span>
+                  <span>Push (Bilateral)</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Experience Level</div>
-                  <div className="col fw-light">Beginner</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Experience Level</span>
+                  <span>Beginner</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Secondary Muscles</div>
-                  <div className="col fw-light">Shoulders, Triceps</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Secondary Muscles</span>
+                  <span>Shoulders, Triceps</span>
                 </div>
               </div>
             </div>
-            <div className="watch p-3">
+            <div>
               <a
-                className="btn btn-outline-light border-0 rounded-5 px-3 py-2 text-uppercase"
-                href="https://www.youtube.com/watch?v=SzcSrpVr0GA&pp=ygUVRHVtYmJlbGwgQmVuY2ggUHJlc3Mg"
+                href="https://www.youtube.com/watch?v=SzcSrpVr0GA&pp=ygUVRHVtYmJlbGwgQmVuY2ggUHJlc3M"
+                className="btn text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full uppercase shadow-md"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                
                 Watch Video
               </a>
             </div>
           </div>
-          <div
-            className="col-12 mb-5 col-lg-7 d-flex justify-content-center justify-content-lg-end col-7 image overflow-hidden position-relative bg-white"
-          >
+          {/* Video Section */}
+          <div className="lg:w-1/2 flex justify-center bg-white rounded-lg shadow-lg overflow-hidden relative [clip-path:polygon(40%_0,_100%_0,_100%_100%,_0%_100%)]">
             <video
               src={dumBell}
               autoPlay
               muted
               loop
-              alt=""
-              className="w-75"
+              className="w-3/4 rounded-lg"
             ></video>
           </div>
         </div>
 
-       <div className="exercise row overflow-hidden">
-          <div
-            className="col-12 mb-5 col-lg-7 d-flex justify-content-center justify-content-lg-start align-items-center reverse overflow-hidden position-relative bg-white"
-          >
+        {/* Exercise 2 */}
+        <div className="flex flex-col-reverse lg:flex-row items-center space-y-10 lg:space-y-0 overflow-hidden">
+          {/* Video Section */}
+          <div className="  lg:w-1/2 flex justify-center bg-white rounded-lg shadow-lg overflow-hidden relative [clip-path:polygon(0_0,_60%_0,_100%_100%,_0%_100%)]">
             <video
               src={penchBar}
+              
               autoPlay
               muted
               loop
-              alt=""
-              className="w-75"
+              className="w-3/4 rounded-lg"
             ></video>
           </div>
-          <div className="col-12 col-lg-5 text-white caption">
-            <h2 className="fs-3 fw-bolder">
-              <i className="fa-thin fa-chevron-right me-1 text-danger"></i>
+          {/* Text Section */}
+          <div className="lg:w-1/2 text-white space-y-5">
+            <h2 className="text-2xl font-bold">
+              <i className="fa-thin fa-chevron-right mr-2 text-red-500"></i>
               Barbell Bench Press
             </h2>
-            <div className="overview p-3 mt-5">
-              <h3 className="fw-light">Exercise Profile</h3>
-              <div className="profile p-5">
-                <div className="row row-cols-2">
-                  <div className="col fw-bold">Target Muscle Group</div>
-                  <div className="col fw-light">Chest</div>
+            <div className=" p-6 rounded-lg shadow-lg space-y-5">
+              <h3 className="font-light text-lg">Exercise Profile</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="font-bold">Target Muscle Group</span>
+                  <span>Chest</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Exercise Type</div>
-                  <div className="col fw-light">Strength</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Exercise Type</span>
+                  <span>Strength</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Equipment Required</div>
-                  <div className="col fw-light">Barbell</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Equipment Required</span>
+                  <span>Barbell</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Mechanics</div>
-                  <div className="col fw-light">Compound</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Mechanics</span>
+                  <span>Compound</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Force Type</div>
-                  <div className="col fw-light">Push (Bilateral)</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Force Type</span>
+                  <span>Push (Bilateral)</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Experience Level</div>
-                  <div className="col fw-light">Intermediate</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Experience Level</span>
+                  <span>Intermediate</span>
                 </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Secondary Muscles</div>
-                  <div className="col fw-light">Shoulders, Triceps</div>
+                <div className="flex justify-between">
+                  <span className="font-bold">Secondary Muscles</span>
+                  <span>Shoulders, Triceps</span>
                 </div>
               </div>
             </div>
-            <div className="watch p-3">
+            <div>
               <a
-                className="btn btn-outline-light border-0 rounded-5 px-3 py-2 text-uppercase"
-                target="_blank"
                 href="https://youtu.be/Nhvz9EzdJ4U?si=5mlhn5ehMiqX1l4_"
-              >
-                
-                Watch Video
-              </a>
-            </div>
-          </div>
-        </div> 
-
-      <div className="exercise row overflow-hidden">
-          <div className="col-12 col-lg-5 text-white caption">
-            <h2 className="fs-3 fw-bolder">
-              <i className="fa-thin fa-chevron-right me-1 text-danger"></i> Cable
-              Crossovers
-            </h2>
-            <div className="overview p-3 mt-5">
-              <h3 className="fw-light">Exercise Profile</h3>
-              <div className="profile p-5">
-                <div className="row row-cols-2">
-                  <div className="col fw-bold">Target Muscle Group</div>
-                  <div className="col fw-light">Chest</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Exercise Type</div>
-                  <div className="col fw-light">Strength</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Equipment Required</div>
-                  <div className="col fw-light">Cable</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Mechanics</div>
-                  <div className="col fw-light">Isolation</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Force Type</div>
-                  <div className="col fw-light">Push (Bilateral)</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Experience Level</div>
-                  <div className="col fw-light">Beginner</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Secondary Muscles</div>
-                  <div className="col fw-light">Shoulders, Triceps</div>
-                </div>
-              </div>
-            </div>
-            <div className="watch p-3">
-              <a
-                className="btn btn-outline-light border-0 rounded-5 px-3 py-2 text-uppercase"
-                href="https://www.youtube.com/watch?v=SzcSrpVr0GA&pp=ygUVRHVtYmJlbGwgQmVuY2ggUHJlc3Mg"
-              >
-               
-                Watch Video
-              </a>
-            </div>
-          </div>
-          <div
-            className="col-12 mb-5 col-lg-7 d-flex justify-content-center justify-content-lg-end col-7 image overflow-hidden position-relative bg-white"
-          >
-            <img
-              src="https://www.inspireusafoundation.org/wp-content/uploads/2024/02/cable-standing-crossover.gif"
-              alt=""
-              className="w-75"
-            />
-          </div>
-        </div>
-       
-        <div className="exercise row overflow-hidden">
-          <div
-            className="col-12 mb-5 col-lg-7 d-flex justify-content-center justify-content-lg-start align-items-center reverse overflow-hidden position-relative bg-white"
-          >
-            <video
-              src={dumbellFly}
-              autoPlay
-              muted
-              loop
-              alt=""
-              className="w-75"
-            ></video>
-          </div>
-          <div className="col-12 col-lg-5 text-white caption">
-            <h2 className="fs-3 fw-bolder">
-              <i className="fa-thin fa-chevron-right me-1 text-danger"></i>
-              Dumbbell Flys
-            </h2>
-            <div className="overview p-3 mt-5">
-              <h3 className="fw-light">Exercise Profile</h3>
-              <div className="profile p-5">
-                <div className="row row-cols-2">
-                  <div className="col fw-bold">Target Muscle Group</div>
-                  <div className="col fw-light">Chest</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Exercise Type</div>
-                  <div className="col fw-light">Strength</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Equipment Required</div>
-                  <div className="col fw-light">Dumbbell</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Mechanics</div>
-                  <div className="col fw-light">Isolation</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Force Type</div>
-                  <div className="col fw-light">Push (Bilateral)</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Experience Level</div>
-                  <div className="col fw-light">Beginner</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Secondary Muscles</div>
-                  <div className="col fw-light">Shoulders, Triceps</div>
-                </div>
-              </div>
-            </div>
-            <div className="watch p-3">
-              <a
-                className="btn btn-outline-light border-0 rounded-5 px-3 py-2 text-uppercase"
+                className="btn text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full uppercase shadow-md"
                 target="_blank"
-                href="https://youtu.be/Nhvz9EzdJ4U?si=5mlhn5ehMiqX1l4_"
+                rel="noopener noreferrer"
               >
-                
                 Watch Video
               </a>
             </div>
-          </div>
-        </div>
-       
-
-       <div className="exercise row overflow-hidden">
-          <div className="col-12 col-lg-5 text-white caption">
-            <h2 className="fs-3 fw-bolder">
-              <i className="fa-thin fa-chevron-right me-1 text-danger"></i> Chest
-              Dip
-            </h2>
-            <div className="overview p-3 mt-5">
-              <h3 className="fw-light">Exercise Profile</h3>
-              <div className="profile p-5">
-                <div className="row row-cols-2">
-                  <div className="col fw-bold">Target Muscle Group</div>
-                  <div className="col fw-light">Chest</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Exercise Type</div>
-                  <div className="col fw-light">Strength</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Equipment Required</div>
-                  <div className="col fw-light">Bodyweight</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Mechanics</div>
-                  <div className="col fw-light">Compound</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Force Type</div>
-                  <div className="col fw-light">Push (Bilateral)</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Experience Level</div>
-                  <div className="col fw-light">Intermediate</div>
-                </div>
-                <div className="row row-cols-2 mt-3">
-                  <div className="col fw-bold">Secondary Muscles</div>
-                  <div className="col fw-light">Abs, Shoulders, Triceps</div>
-                </div>
-              </div>
-            </div>
-            <div className="watch p-3">
-              <a
-                className="btn btn-outline-light border-0 rounded-5 px-3 py-2 text-uppercase"
-                href="https://www.youtube.com/watch?v=SzcSrpVr0GA&pp=ygUVRHVtYmJlbGwgQmVuY2ggUHJlc3Mg"
-              >
-                
-                Watch Video
-              </a>
-            </div>
-          </div>
-          <div
-            className="col-12 mb-5 col-lg-7 d-flex justify-content-center justify-content-lg-end col-7 image overflow-hidden position-relative bg-white"
-          >
-            <video
-              src={dip}
-              autoPlay
-              muted
-              loop
-              alt=""
-              className="w-75"
-            ></video>
           </div>
         </div>
       </div>
-    </div>
-     
     </>
   );
 }

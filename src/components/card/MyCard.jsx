@@ -8,7 +8,7 @@ function MyCard({imgSrc , title ,toLink }) {
     <>
 
 
-<div className="max-w-sm CARD  w-full  flex justify-center flex-col max-h-[360px]   md:max-h-[360px] md:hover:scale-105  bg-transparent border border-gray-200 rounded-lg  text-center ">
+<div className="max-w-sm CARD  w-full  flex justify-center flex-col max-h-[360px]   md:max-h-[360px] md:hover:scale-105  transition-transform duration-500  bg-transparent border border-gray-200 rounded-lg  text-center ">
     
     <div className="flex justify-center pt-5 pb-2 ">
     <a href="#">
@@ -22,7 +22,7 @@ function MyCard({imgSrc , title ,toLink }) {
         </a>
        
        <Link to={toLink}>
-       <button className="btn outline"  
+       <button className="btn "  
          
          >LEARN MORE</button>
        </Link>

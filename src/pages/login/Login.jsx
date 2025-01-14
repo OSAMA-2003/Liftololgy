@@ -4,17 +4,34 @@
 import "./login.css";
 import logo from "../../assets/fitness_logo.png";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useContext} from "react";
+import { AuthContext } from "../../container/contexts/Auth";
 function Login() {
 
     const {register , handleSubmit , formState:{errors}} = useForm()
-    const onSubmit = data => console.log(data)
+    const navigate = useNavigate();
+    const redirectPath = location.state?.path || "/";
+
+    const {login} = useContext(AuthContext)
+
+    const onSubmit = (data) => {
+      console.log(data);
+      login({
+        name: data.name,
+        tall: data.tall,
+        weight: data.weight,
+      });
+      navigate(redirectPath, { replace: true });
+    };
+    
+    
 
   return (
     <>
-      <div className="container ">
+      <div className="container min-h-screen ">
         <div className="row pt-24">
           <div className="col-lg-10 col-xl-9 mx-auto h-100">
             <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
@@ -60,6 +77,74 @@ function Login() {
                   {errors.password?.type=="required" && <p className=" text-danger mb-3">This field is required</p>}
                   {errors.password?.type=="minLength" && <p className=" text-danger mb-3">8 characters minimum</p>}
 
+
+                  {/* New Addition */}
+
+                  <div className="flex gap-5">
+  {/* Tall Input */}
+  <div className="form-floating mb-3">
+    <input
+      type="number"
+      className="form-control "
+      id="floatingInputTall"
+      placeholder="cm"
+      name="tall"
+      min="140" // Minimum tall
+      max="220" // Maximum tall
+      {...register("tall", {
+        required: true,
+        min: 140,
+        max: 220,
+      })}
+    />
+    <label>Tall</label>
+    {errors.tall?.type === "required" && (
+      <p className="text-danger">Tall is required</p>
+    )}
+    {errors.tall?.type === "min" && (
+      <p className="text-danger">Minimum tall is 140 cm</p>
+    )}
+    {errors.tall?.type === "max" && (
+      <p className="text-danger">Maximum tall is 220 cm</p>
+    )}
+  </div>
+
+  {/* Weight Input */}
+  <div className="form-floating mb-3">
+    <input
+      type="number"
+      className="form-control"
+      id="floatingInputWeight"
+      placeholder="KG"
+      name="weight"
+      min="40" // Minimum weight
+      max="300" // Maximum weight
+      {...register("weight", {
+        required: true,
+        min: 40,
+        max: 300,
+      })}
+    />
+    <label>Weight</label>
+    {errors.weight?.type === "required" && (
+      <p className="text-danger">Weight is required</p>
+    )}
+    {errors.weight?.type === "min" && (
+      <p className="text-danger">Minimum weight is 40 KG</p>
+    )}
+    {errors.weight?.type === "max" && (
+      <p className="text-danger">Maximum weight is 300 KG</p>
+    )}
+  </div>
+</div>
+
+
+
+
+
+
+
+
                   
                     <div className="d-grid mb-2">
                       <button
@@ -71,9 +156,8 @@ function Login() {
                     </div>
                   
                   <Link
-                    to="/signup"
-                    className="d-block text-black text-center mt-2 small"
-                    href="#"
+                    to="/signUp"
+                    className="d-block !my-1 text-black text-center mt-2 "
                   >
                     Don`t have account? Sign Up
                   </Link>

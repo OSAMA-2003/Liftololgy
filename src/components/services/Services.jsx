@@ -24,7 +24,7 @@ const Services = () => {
               </p>
             </div>
             <div className="button-wrapper">
-              <button className="btn outline">LEARN MORE</button>
+              <button className="btn ">LEARN MORE</button>
             </div>
           </div>
 
@@ -40,7 +40,7 @@ const Services = () => {
               </p>
             </div>
             <div className="button-wrapper">
-              <button className="btn outline">LEARN MORE</button>
+              <button className="btn ">LEARN MORE</button>
             </div>
           </div>
 
@@ -55,7 +55,7 @@ const Services = () => {
               </p>
             </div>
             <div className="button-wrapper">
-              <button className="btn outline">LEARN MORE</button>
+              <button className="btn ">LEARN MORE</button>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ const Services = () => {
               </p>
             </div>
             <div className="button-wrapper">
-              <button className="btn outline">LEARN MORE</button>
+              <button className="btn ">LEARN MORE</button>
             </div>
           </div>
         </div>
