@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <>
-      <header className=" header_container pt-40  flex h-fit  justify-center">
+      <header className=" header_container   flex h-fit  justify-center">
         <div
           className=" header flex items-center lg:items-end justify-between w-[80%]  "
           id="home"

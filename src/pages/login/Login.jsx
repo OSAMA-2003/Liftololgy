@@ -1,194 +1,163 @@
-/** @format */
-
-
+import { useState } from "react";
 import "./login.css";
 import logo from "../../assets/fitness_logo.png";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { FaFacebook } from "react-icons/fa";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useContext} from "react";
-import { AuthContext } from "../../container/contexts/Auth";
+import { MdError } from "react-icons/md"; // ✅ أيقونة الخطأ
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase";
+
 function Login() {
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [error, setError] = useState(""); // ✅ متغير للأخطاء
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } 
+  } = useForm();
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPath = location.state?.path || "/";
 
-    const {register , handleSubmit , formState:{errors}} = useForm()
-    const navigate = useNavigate();
-    const redirectPath = location.state?.path || "/";
-
-    const {login} = useContext(AuthContext)
-
-    const onSubmit = (data) => {
-      console.log(data);
-      login({
-        name: data.name,
-        tall: data.tall,
-        weight: data.weight,
-      });
+  const handleLogin = async (data) => {
+    setLoading(true);
+    setError(""); // ✅ امسح أي Error قبل المحاولة
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       navigate(redirectPath, { replace: true });
-    };
-    
-    
+    } catch (error) {
+      if (error.code === "auth/too-many-requests") {
+        setError("Too many failed attempts. Account temporarily locked. Try again later.");
+      } else {
+        setError("Incorrect email or password");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setGoogleLoading(true);
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate(redirectPath, { replace: true });
+    } catch (error) {
+      if (error.code === 'auth/account-exists-with-different-credential') {
+        setError("An account already exists with this email. Try logging in with email/password.");
+      } else {
+        setError("Google login failed");
+      }
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
 
   return (
-    <>
-      <div className="container min-h-screen ">
-        <div className="row pt-24">
-          <div className="col-lg-10 col-xl-9 mx-auto h-100">
-            <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
-              <div className="card-img-left gradient__bg  d-flex  ">
-              <div className=" flex justify-center align-center">
-              <img src={logo} className="w-50" />
-                  {/* <h2 className="text-center text-black mt-4">Project</h2> */}
-                </div>
+    <div className="container min-h-screen relative">
+      
+      {/* ✅ مربع الخطأ في نص الصفحة */}
+      {error && (
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded flex items-center gap-2 shadow-lg z-50">
+          <MdError className="text-red-600 text-2xl" />
+          <span className="font-semibold">{error}</span>
+        </div>
+      )}
+      
+      <div className="row pt-24">
+        <div className="col-lg-10 col-xl-9 mx-auto h-100">
+          <div className="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+            <div className="card-img-left gradient__bg d-flex">
+              <div className="flex justify-center align-center">
+                <img src={logo} className="w-50" alt="Fitness Logo" />
               </div>
-              <div className="card-body p-4 p-sm-5">
-                <h3 className="card-title text-center mb-5 ">Login</h3>
+            </div>
+            <div className="card-body p-4 p-sm-5">
+              <h3 className="card-title text-2xl font-bold text-center mb-5">Login</h3>
 
-                <form onSubmit={handleSubmit(onSubmit)} > 
-                  <div className="form-floating mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="floatingInputUserName"
-                      placeholder="name"
-                      name="name"
-                      {...register ("name",{required:true ,minLength:3,pattern: /^[A-Za-z]+$/i })}
-                    />
-                    <label >User name</label>
-                  </div>
-                  {errors.name?.type==="required" && <p className=" text-danger">This field is required</p>}
-                  {errors.name?.type==="minLength" && <p className=" text-danger">Three letters min</p>}
-                  {errors.name?.type==="pattern" && <p className=" text-danger">Letters only</p>}
-                  
-
-
-                 
-                  <div className="form-floating mb-3">
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="floatingPassword"
-                      placeholder="Password"
-                      name="password"
-                      {...register ("password",{required:true , minLength:8}) }
-                    />
-                    <label>Password</label>
-                  </div>
-                  {errors.password?.type=="required" && <p className=" text-danger mb-3">This field is required</p>}
-                  {errors.password?.type=="minLength" && <p className=" text-danger mb-3">8 characters minimum</p>}
-
-
-                  {/* New Addition */}
-
-                  <div className="flex gap-5">
-  {/* Tall Input */}
-  <div className="form-floating mb-3">
-    <input
-      type="number"
-      className="form-control "
-      id="floatingInputTall"
-      placeholder="cm"
-      name="tall"
-      min="140" // Minimum tall
-      max="220" // Maximum tall
-      {...register("tall", {
-        required: true,
-        min: 140,
-        max: 220,
-      })}
-    />
-    <label>Tall</label>
-    {errors.tall?.type === "required" && (
-      <p className="text-danger">Tall is required</p>
-    )}
-    {errors.tall?.type === "min" && (
-      <p className="text-danger">Minimum tall is 140 cm</p>
-    )}
-    {errors.tall?.type === "max" && (
-      <p className="text-danger">Maximum tall is 220 cm</p>
-    )}
-  </div>
-
-  {/* Weight Input */}
-  <div className="form-floating mb-3">
-    <input
-      type="number"
-      className="form-control"
-      id="floatingInputWeight"
-      placeholder="KG"
-      name="weight"
-      min="40" // Minimum weight
-      max="300" // Maximum weight
-      {...register("weight", {
-        required: true,
-        min: 40,
-        max: 300,
-      })}
-    />
-    <label>Weight</label>
-    {errors.weight?.type === "required" && (
-      <p className="text-danger">Weight is required</p>
-    )}
-    {errors.weight?.type === "min" && (
-      <p className="text-danger">Minimum weight is 40 KG</p>
-    )}
-    {errors.weight?.type === "max" && (
-      <p className="text-danger">Maximum weight is 300 KG</p>
-    )}
-  </div>
-</div>
-
-
-
-
-
-
-
-
-                  
-                    <div className="d-grid mb-2">
-                      <button
-                        className="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
-                        type="submit"
-                      >
-                        Login
-                      </button>
+              <form onSubmit={handleSubmit(handleLogin)}>
+                <div className="form-floating mb-3">
+                  <input
+                    type="email"
+                    className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                    id="floatingEmail"
+                    placeholder="Email"
+                    {...register("email", { 
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid email address"
+                      }
+                    })}
+                  />
+                  <label htmlFor="floatingEmail">Email</label>
+                  {errors.email && (
+                    <div className="invalid-feedback">
+                      {errors.email.message}
                     </div>
-                  
-                  <Link
-                    to="/signUp"
-                    className="d-block !my-1 text-black text-center mt-2 "
+                  )}
+                </div>
+
+                <div className="form-floating mb-3">
+                  <input
+                    type="password"
+                    className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                    id="floatingPassword"
+                    placeholder="Password"
+                    {...register("password", { 
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Minimum 8 characters required"
+                      }
+                    })}
+                  />
+                  <label htmlFor="floatingPassword">Password</label>
+                  {errors.password && (
+                    <div className="invalid-feedback">
+                      {errors.password.message}
+                    </div>
+                  )}
+                </div>
+
+                <div className="d-grid mb-2">
+                  <button
+                    className="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
+                    type="submit"
+                    disabled={loading}
                   >
-                    Don`t have account? Sign Up
-                  </Link>
+                    {loading ? "Logging in..." : "Login"}
+                  </button>
+                </div>
 
-                  <hr className="my-4" />
+                <Link
+                  to="/signUp"
+                  className="d-block text-center text-muted mb-3"
+                >
+                  Don't have an account? Sign Up
+                </Link>
 
-                  <div className="d-grid mb-2">
-                    <button
-                      className="btn btn-lg btn-google btn-login fw-bold text-uppercase d-flex"
-                      type="submit"
-                    >
-                      <FcGoogle className="mx-3 fs-4" /> Sign in with Google
-                    </button>
-                  </div>
+                <div className="d-grid mb-2">
+                  <button
+                    className="btn btn-lg btn-outline-primary btn-login fw-bold text-uppercase d-flex align-items-center justify-content-center"
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    disabled={googleLoading}
+                  >
+                    <FcGoogle className="mx-2 fs-5" />
+                    {googleLoading ? "Signing in..." : "Sign in with Google"}
+                  </button>
+                </div>
 
-                  <div className="d-grid">
-                    <button
-                      className="btn btn-lg btn-facebook btn-login fw-bold text-uppercase d-flex"
-                      type="submit"
-                    >
-                      <FaFacebook className="mx-3 fs-4" />
-                      Sign in with Facebook
-                    </button>
-                  </div>
-                </form>
-              </div>
+              </form>
+
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

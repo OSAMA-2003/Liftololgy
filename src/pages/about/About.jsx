@@ -1,113 +1,41 @@
-/* eslint-disable react/no-unescaped-entities */
-import  { useEffect } from "react";
-import { FaDumbbell, FaChartLine, FaRobot, FaCheckCircle, FaEye } from "react-icons/fa";
+import { motion } from "framer-motion";
+import aboutImage from "../../assets/fitness_logo.png";
+import { useEffect } from "react";
 
 const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   return (
-    <div className="min-h-screen pt-24 px-6 lg:px-16">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className=" font-bold gradient_text mb-4">About Liftology</h1>
-        <p className="text-lg font-bold text-gray-300 max-w-2xl mx-auto">
-          The AI-powered fitness solution designed to personalize your fitness journey
-          with advanced technology, predictive insights, and real-time guidance.
-        </p>
-      </div>
-
-      {/* Content Section */}
-      <div className="grid gap-12">
-        {/* Introduction Card */}
-        <div className="bg-red-700 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-200 mb-4">Introduction</h2>
-          <p className="text-gray-300 leading-relaxed">
-            Liftology revolutionizes personal fitness by combining Artificial
-            Intelligence with proven training techniques. Get tailored workout and
-            nutrition plans designed to help you safely and effectively achieve your
-            goals.
+    <div className="min-h-screen flex items-center justify-center  text-white py-12 px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center"
+      >
+       
+        <div className=" shadow-xl p-6 rounded-2xl">
+          <h1 className="text-5xl text-start font-bold mb-4 text-red-500">About Liftology</h1>
+          <p className="text-lg text-gray-300 leading-relaxed">
+            Liftology is revolutionizing fitness with a personalized and data-driven
+            approach to health and wellness. Our platform predicts a 7-day fitness plan
+            tailored to users’ weight and height, ensuring accessibility for all fitness levels.
+          </p>
+          <p className="text-lg text-gray-300 mt-4 leading-relaxed">
+            Future enhancements, such as progress tracking and AI-powered performance analysis,
+            will provide real-time feedback and customized recommendations. Join us in shaping
+            the future of AI-driven fitness solutions!
           </p>
         </div>
-
-        {/* Problem Statement */}
-        <div className="bg-red-700 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-200 mb-4">The Problem</h2>
-          <p className="text-gray-300 leading-relaxed">
-            Many fitness enthusiasts lack personalized guidance, leading to slow
-            progress and injuries. Traditional fitness apps offer generic plans that
-            don't adapt to users' progress.
-          </p>
+        <div className="relative">
+          <img
+            src={aboutImage}
+            alt="Liftology Gym"
+            className="w-full rounded-2xl shadow-lg"
+          />
         </div>
-
-        {/* Key Features */}
-        <div className="bg-red-700 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-200 mb-6">Key Features</h2>
-          <div className="grid md:grid-cols-2 gap-4 text-gray-300">
-            {/* Feature 1 */}
-            <div className="flex items-start space-x-4">
-              <FaDumbbell className="text-blue-400 text-3xl" />
-              <div>
-                <h3 className="font-bold text-gray-200">Personalized Plans</h3>
-                <p>AI-driven algorithms create customized workout and nutrition programs.</p>
-              </div>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="flex items-start space-x-4">
-              <FaChartLine className="text-green-400 text-3xl" />
-              <div>
-                <h3 className="font-bold text-gray-200">Predictive Analytics</h3>
-                <p>Forecast future lifting capacities based on historical performance data.</p>
-              </div>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="flex items-start space-x-4">
-              <FaRobot className="text-yellow-400 text-3xl" />
-              <div>
-                <h3 className="font-bold text-gray-200">Real-Time Technique Correction</h3>
-                <p>Analyze your form with computer vision and reduce injury risk.</p>
-              </div>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="flex items-start space-x-4">
-              <FaCheckCircle className="text-red-400 text-3xl" />
-              <div>
-                <h3 className="font-bold text-gray-200">Progressive Training</h3>
-                <p>Incorporate proven techniques like progressive overload and periodization.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* New Vision Card */}
-        <div className="bg-red-700 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-200 mb-4">Our Vision</h2>
-          <div className="flex items-start space-x-4 text-gray-300">
-            <FaEye className="text-purple-600 text-3xl" />
-            <div>
-              <h3 className="font-bold text-gray-200">Transforming Fitness</h3>
-              <p>
-                Our vision is to revolutionize the fitness industry by integrating AI into
-                every aspect of training, enabling users to reach their full potential in a safe
-                and data-driven environment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Conclusion */}
-      <div className="text-center my-12">
-        <h2 className="text-2xl font-semibold text-gray-200 mb-2">Thank You for Choosing Liftology!</h2>
-        <p className="text-gray-300">
-          Start your fitness journey with confidence and precision. Together, we can
-          achieve your goals.
-        </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

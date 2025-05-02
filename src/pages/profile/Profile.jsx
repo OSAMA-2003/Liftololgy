@@ -1,47 +1,60 @@
-/** @format */
-
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../container/contexts/Auth";
+import  { useEffect, useState } from "react";
+import { auth } from "../../firebase";
+import { logout } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
 function Profile() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate(); // استخدام التنقل
-
-  const handleLogout = () => {
-    logout(); // تسجيل الخروج
-    navigate("/"); // إعادة التوجيه إلى الصفحة الرئيسية
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
-    <>
-      <div className="min-h-[100vh] pt-24">
-        <h1 className="gradient_text ">Profile</h1>
-        <div className="px-5">
-          <div className="!text-gray-200 text-5xl">
-            {/* User profile information */}
-            <h2 className="font-bold">User Information</h2>
-            {user ? (
-              <div className=" text-4xl my-5 flex flex-col gap-5">
-                <h2>Name: {user.name}</h2>
-                <h2>Tall: {user.tall} cm</h2>
-                <h3>Weight: {user.weight} kg</h3>
-              </div>
-            ) : (
-              <p>No user data available.</p>
-            )}
-          </div>
+    <div className="min-h-screen flex items-center justify-center  text-white">
+      <div className=" CARD p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
+        <h1 className="text-4xl font-bold mb-6 gradient_text">Profile</h1>
 
-          <button onClick={handleLogout} className="btn mt-5">
-            Logout
-          </button>
-        </div>
+        {user ? (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Name:</h2>
+              <p className="text-lg">{user.displayName || "No Name Available"}</p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Email:</h2>
+              <p className="text-lg">{user.email}</p>
+            </div>
+
+            <button
+              onClick={handleLogout}
+              className="mt-6 btn"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <p className="text-lg">Loading user info...</p>
+        )}
       </div>
-    </>
+    </div>
   );
 }
 

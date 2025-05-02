@@ -15,7 +15,7 @@ function FitTools( ) {
     <p className=" text-gray-500 my-10 text-center">Access a variety of tools to help you reach your fitness goals more effectively</p>
         
  <div className='cards-container grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-4 gap-10 lg:gap-28 p-10'>
- <MyCard title="Calories Calculator" imgSrc={icon1} />
+  <MyCard title="Calories Calculator" imgSrc={icon1} />
   <MyCard title="BMI Calculator" imgSrc={icon2} />
   <MyCard title="Goal Setting Tool" imgSrc={icon4} />
   <MyCard title="Food Calculator" imgSrc={icon3} />

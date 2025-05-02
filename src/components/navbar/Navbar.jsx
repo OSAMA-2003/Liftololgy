@@ -1,85 +1,100 @@
-/** @format */
-
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/fitness_logo.png";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
-import "./navbar.css";
 import { CgProfile } from "react-icons/cg";
-import { AuthContext } from "../../container/contexts/Auth";
+import { auth } from "../../firebase";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import "./navbar.css";
 
 const Navbar = () => {
+  const [user, setUser] = useState(null);
   const [toggleMenu, setToggleMenu] = useState(false);
   const navigate = useNavigate();
 
-  const { user , logout } = useContext(AuthContext);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
+  // Function to return styles based on isActive
+  const navLinkStyles = ({ isActive }) => ({
+    color: isActive ? "#ff0000 " : "white",
+  });
 
   return (
     <>
-      <nav className="navbar top-0 bg-red-950 fixed w-full z-50 py-[0.5rem] px-[6rem] flex justify-between items-center border-b-2  border-red-950  ">
+      <nav className="navbar top-0 bg-red-950 fixed w-full z-50 py-[0.5rem] px-4 md:px-[6rem] flex justify-between items-center border-b-2 border-red-950">
         {/* Navbar Links */}
-
         <div className="navbar_links flex items-center">
           <div className="logo">
             <img src={logo} width={80} alt="logo" />
           </div>
-          {/* Navbar Links Container with <p> tags */}
-          <ul className="navbar_links_container hidden  lg:flex  row-auto ml-5 ">
+
+          <ul className="navbar_links_container hidden gap-4 text-white text-xl lg:flex row-auto ml-5">
             <li>
-              <NavLink exact to="/" activeClassName="active">
+              <NavLink to="/" style={navLinkStyles}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/exercises" activeClassName="active">
+              <NavLink to="/exercises" style={navLinkStyles}>
                 Exercises
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about" activeClassName="active">
+              <NavLink to="/about" style={navLinkStyles}>
                 About Us
               </NavLink>
             </li>
             <li>
-              <NavLink to="/contact" activeClassName="active">
+              <NavLink to="/contact" style={navLinkStyles}>
                 Contact
               </NavLink>
             </li>
           </ul>
         </div>
 
-        {/* Sign In / Sign Up */}
-        <div className="flex">
-          {!user && (
-            <div className="navbar_sign  items-center  hidden lg:flex">
+        {/* Sign In / Profile / Sign Up */}
+        <div className="flex items-center">
+          {!user ? (
+            <div className="navbar_sign hidden lg:flex items-center">
               <Link to="/login">
-                <p>Sign in</p>
+                <p className="text-white mr-5">Sign in</p>
               </Link>
-
               <button
                 type="button"
-                onClick={() => {
-                  navigate("/signUp");
-                }}
-                className="btn   text-white"
+                onClick={() => navigate("/signUp")}
+                className="btn text-white"
               >
                 Sign up
               </button>
             </div>
-          )}
-
-          {user && (
-            <Link to="/profile ">
-              <CgProfile
-                className="ml-5 text-4xl text-gray-100 hover:text-gray-500 hidden lg:block "
-                title="profile"
-              />
-            </Link>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link to="/profile">
+                <CgProfile
+                  className="text-4xl text-gray-100 hover:text-gray-500 hidden lg:block"
+                  title="Profile"
+                />
+              </Link>
+            </div>
           )}
         </div>
 
         {/* Mobile Menu */}
-        <div className="menu flex lg:hidden ml-2 ">
+        <div className="menu    justify-between lg:hidden ml-2">
           {toggleMenu ? (
             <RiCloseLine
               color="#fff"
@@ -95,62 +110,61 @@ const Navbar = () => {
           )}
 
           {toggleMenu && (
-            <div className="menu_container flex columns-1 justify-end items-end text-end">
-              <div className="menu_container_links scale-up-center">
-              {user && (
-                <div className="flex justify-end">
-                <Link to="/profile ">
-              <CgProfile
-                className="ml-5 text-4xl text-gray-100 hover:text-gray-500 "
-                title="profile"
-              />
-            </Link>
-                </div>
-           
-          )}
+            <div className="menu_container absolute bg-red-950 pl-20 pr-4 py-4 right-1 rounded-2 flex flex-col justify-end items-end text-end">
+              <div className="menu_container_links scale-up-center text-xl font-bold">
+                {user && (
+                  <div className="flex justify-end mb-4">
+                    <Link to="/profile">
+                      <CgProfile
+                        className="text-4xl text-gray-100 hover:text-gray-500"
+                        title="Profile"
+                      />
+                    </Link>
+                  </div>
+                )}
                 <p>
-                  <NavLink exact to="/" activeClassName="active">
+                  <NavLink to="/" style={navLinkStyles}>
                     Home
                   </NavLink>
                 </p>
                 <p>
-                  <NavLink to="/exercises" activeClassName="active">
+                  <NavLink to="/exercises" style={navLinkStyles}>
                     Exercises
                   </NavLink>
                 </p>
                 <p>
-                  <NavLink to="/about" activeClassName="active">
+                  <NavLink to="/about" style={navLinkStyles}>
                     About Us
                   </NavLink>
                 </p>
                 <p>
-                  <NavLink to="/contact" activeClassName="active">
+                  <NavLink to="/contact" style={navLinkStyles}>
                     Contact
                   </NavLink>
                 </p>
-              {!user&&
-                <div className="menu_sign">
-                  <Link to="/login">
-                    <p>Sign in</p>
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      navigate("/signUp");
-                    }}
-                    className="btn btn-lg btn-primary btn-login text-white"
-                  >
-                    Sign up
-                  </button>
-                </div>
-              }
 
-              {user && 
-                <button onClick={logout} className="btn">
-            Logout
-          </button>
-              }
-                
+                {!user && (
+                  <div className="menu_sign flex flex-col items-end gap-2 mt-4">
+                    <Link to="/login">
+                      <p>Sign in</p>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => navigate("/signUp")}
+                      className="btn btn-lg btn-primary btn-login text-white"
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                )}
+                {user && (
+                  <button
+                    onClick={logout}
+                    className="btn mt-4 text-white"
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             </div>
           )}

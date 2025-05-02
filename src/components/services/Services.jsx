@@ -5,7 +5,7 @@ import "./services.css";
 const Services = () => {
   return (
     <>
-      <section className=" container section flex flex-col justify-center items-center  h-fit mt-10  ">
+      <div className=" container section flex flex-col justify-center items-center  h-fit mt-10  ">
         <h1 className="gradient_text  ">Our Services</h1>
         <p className=" text-gray-500 my-10 text-center">
           At This Part You Can Easily access all of our servises. take a look at
@@ -73,7 +73,7 @@ const Services = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };
